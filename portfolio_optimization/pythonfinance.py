@@ -2,12 +2,11 @@
 import pandas as pd  
 import numpy as np
 from pandas_datareader import data, wb
-import datetime
 import scipy.optimize as sco
 from scipy import stats
 
 
-def get_tickers(tickers, start, end, attrib):
+def _get_tickers(tickers, start, end, attrib):
     ticker_data = pd.DataFrame([_get_ticker_data(x, start, end)[attrib] for x in tickers]).T
     ticker_data.columns = tickers
     return ticker_data
@@ -15,6 +14,10 @@ def get_tickers(tickers, start, end, attrib):
 def _get_ticker_data(ticker, start, end):
     ticker_data = data.DataReader(ticker, 'yahoo', start, end)
     return ticker_data
+
+def _get_ticker_closing(ticker, start, end):
+    ticker_data = data.DataReader(ticker, 'yahoo', start, end)
+    return ticker_data["Adj Close"]
 
 def get_Percent_change(ticker, start, end, attrib):
     ticker_data = get_tickers(ticker,start, end, attrib)

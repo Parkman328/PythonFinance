@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.before_first_request
 def before_first_request():
-    log_level = logging.DEBUG
+    log_level = logging.INFO
     app.logger.setLevel(log_level)
 
 @app.route('/')
@@ -133,4 +133,4 @@ def simulate_random_portfolios():
 
 if __name__ == "__main__":
     # app.run(debug=True)
-    app.run(debug='True', host='0.0.0.0')
+    app.run(debug='True', host='0.0.0.0', port=5000)
